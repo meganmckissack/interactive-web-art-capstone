@@ -5,6 +5,8 @@ Megan Mckissack
 ## Description
 An interactive web app to give users a fun experience and a connection to others, collaborating with strangers to create art.
 
+![app diagram](app-diagram.png)
+
 ## Technologies Used
 - _websockets_
 - _react.js_
