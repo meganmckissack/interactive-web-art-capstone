@@ -8,9 +8,12 @@ An interactive web app to give users a fun experience and a connection to others
 ![app diagram](app-diagram.png)
 
 ## Technologies Used
-- _websockets_
+- _socket.io_
 - _react.js_
 - _node.js_
+- _express.js_
+- _cors_
+- _nodemon_
 - _three.js_
 - _webgl_
 
