@@ -11,3 +11,7 @@
 11/5:
 - watch shader prototyping tutorial (was taught 10/25 but had to watch recording later due to work schedule)
   - 2 hrs - https://maximalexpression.notion.site/SHADER-PROTOTYPING-146da33982c54746a0589ebcbdbf717a
+
+  11/19:
+  - reading useEffect hooks with web sockets
+    - https://rossbulat.medium.com/react-hooks-managing-web-sockets-with-useeffect-and-usestate-2dfc30eeceec
