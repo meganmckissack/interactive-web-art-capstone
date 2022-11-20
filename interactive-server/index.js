@@ -16,13 +16,29 @@ const socketIO = require('socket.io')(http, {
 
 app.use(cors());
 
+let users = [];
+
 //connects to client app and creates unique id for each socket/user
 socketIO.on('connection', (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
-  socket.on('disconnect', () => {
-    console.log('🔥: A user disconnected');
+
+    //listens for new users, pushes users to array, then sends users array list back to client app
+    socket.on('newUser', (data) => {
+      users.push(data);
+      socketIO.emit('newUserResponse', users);
+    });
+  
+    //updates user list array when user disconnects and sends updated user list back to client app
+    socket.on('disconnect', () => {
+      console.log('🔥: A user disconnected');
+      users = users.filter((user) => user.socketID !== socket.id);
+      socketIO.emit('newUserResponse', users);
+      socket.disconnect();
   });
+
 });
+
+
 
 app.get('/api', (req, res) => {
   res.json({
