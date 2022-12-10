@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Tree from './Tree';
 
 function Splash({ socket }) {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ function Splash({ socket }) {
         />
       <button>Sign In</button>
       </form>
+      <Tree />
     </React.Fragment>
   );
 }
