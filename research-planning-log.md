@@ -15,3 +15,14 @@
   11/19:
   - reading useEffect hooks with web sockets
     - https://rossbulat.medium.com/react-hooks-managing-web-sockets-with-useeffect-and-usestate-2dfc30eeceec
+
+12/6: 
+  - more shader practice with three.js - working with animiations and textures
+    - 2 hrs - https://github.com/meganmckissack/shaders
+
+12/7: 
+  - watch and practice updated three.js tutorials on working with react three fiber, a react renderer for three.js 
+    - 3 hrs - https://github.com/meganmckissack/r3f-practice
+
+
+
