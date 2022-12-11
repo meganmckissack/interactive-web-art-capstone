@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCanvas } from '../hooks/useCanvas.js';
+// import { useCanvas } from '../hooks/useCanvas.js';
+import { Canvas } from "@react-three/fiber";
+import Tree from "./Tree.js";
 
-const style = {
-  padding: "10px"
-};
+// const style = {
+//   padding: "10px"
+// };
 
 function Scene({ socket }) {
   const [users, setUsers] = useState([]);
-  const [ coordinates, setCoordinates, canvasRef, canvasWidth, canvasHeight ] = useCanvas();
+  // const [ coordinates, setCoordinates, canvasRef, canvasWidth, canvasHeight ] = useCanvas();
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -22,30 +24,34 @@ function Scene({ socket }) {
     window.location.reload();
   }
 
-  const handleCanvasClick = (event) => {
-    //get user mouse location
-    const currentCoord = { x: event.clientX, y: event.clientY };
-    //add newest location to array in state
-    setCoordinates([...coordinates, currentCoord]);
-  }
+  // const handleCanvasClick = (event) => {
+  //   //get user mouse location
+  //   const currentCoord = { x: event.clientX, y: event.clientY };
+  //   //add newest location to array in state
+  //   setCoordinates([...coordinates, currentCoord]);
+  // }
 
   return (
     <React.Fragment>
-      <div>
-      <canvas
+      <div style={{ width: "95vw", height: "95vh" }}>
+      {/* <canvas
         ref={canvasRef}
         width={canvasWidth}
         height={canvasHeight}
         onClick={handleCanvasClick}
-      />
-      </div>
-      <div className="usernames" style={style}>
+      /> */}
+      <Canvas>
+        <Tree />
+      </Canvas>
+      
+      <div className="usernames" >
         {users.map((user) => (
           <p key={user.socketID}>{user.userName}</p>
         ))}
       </div>
       <div className="goBack-button">
         <button onClick={handleLeaveScene}>Leave Experience</button>
+      </div>
       </div>
     </React.Fragment>
   );
