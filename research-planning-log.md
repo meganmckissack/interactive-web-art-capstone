@@ -24,5 +24,8 @@
   - watch and practice updated three.js tutorials on working with react three fiber, a react renderer for three.js 
     - 3 hrs - https://github.com/meganmckissack/r3f-practice
 
+12/11:
+  - load new depenendencies and successful 3d model on react-three-fiber practice repo 
+      https://github.com/meganmckissack/r3f-practice
 
 
