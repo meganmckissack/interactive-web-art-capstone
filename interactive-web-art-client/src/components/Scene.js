@@ -24,6 +24,10 @@ function Scene({ socket }) {
     window.location.reload();
   }
 
+  // const eventHandler = () => {
+  //   console.log("click");
+  // }
+
   // const handleCanvasClick = (event) => {
   //   //get user mouse location
   //   const currentCoord = { x: event.clientX, y: event.clientY };
