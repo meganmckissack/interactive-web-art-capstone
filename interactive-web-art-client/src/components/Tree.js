@@ -4,6 +4,7 @@ import { Perf } from 'r3f-perf';
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+
 function Tree () {
   const treeModel = useLoader(GLTFLoader, './tree-stump.glb');
 

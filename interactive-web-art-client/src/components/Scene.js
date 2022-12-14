@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+// import * as dat from 'lil-gui';
 // import { useCanvas } from '../hooks/useCanvas.js';
 import { Canvas } from "@react-three/fiber";
 import Tree from "./Tree.js";
+// import Leaf from "./Leaf.js";
 
 // const style = {
 //   padding: "10px"
@@ -35,6 +37,8 @@ function Scene({ socket }) {
   //   setCoordinates([...coordinates, currentCoord]);
   // }
 
+
+
   return (
     <React.Fragment>
       <div style={{ width: "95vw", height: "95vh" }}>
@@ -46,6 +50,7 @@ function Scene({ socket }) {
       /> */}
       <Canvas>
         <Tree />
+        {/* <Leaf /> */}
       </Canvas>
       
       <div className="usernames" >
