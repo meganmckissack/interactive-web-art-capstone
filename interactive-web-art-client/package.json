@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-spring/web": "^9.6.0",
     "@react-three/drei": "^9.46.4",
     "@react-three/fiber": "^8.9.1",
     "@testing-library/jest-dom": "^5.16.5",
@@ -17,6 +18,7 @@
     "react-scripts": "5.0.1",
     "socket.io-client": "^4.5.3",
     "three": "^0.147.0",
+    "three-stdlib": "^2.20.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

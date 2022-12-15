@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import * as dat from 'lil-gui';
-import { useCanvas } from '../hooks/useCanvas.js';
-// import { Canvas } from "@react-three/fiber";
+// import { useCanvas } from '../hooks/useCanvas.js';
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from '@react-three/drei'
 // import Tree from "./Tree.js";
 // import Leaf from "./Leaf.js";
+import Svg from "./LeafShape";
 
 // const style = {
 //   padding: "10px"
@@ -12,7 +14,7 @@ import { useCanvas } from '../hooks/useCanvas.js';
 
 function Scene({ socket }) {
   const [users, setUsers] = useState([]);
-  const [ coordinates, setCoordinates, canvasRef, canvasWidth, canvasHeight ] = useCanvas();
+  // const [ coordinates, setCoordinates, canvasRef, canvasWidth, canvasHeight ] = useCanvas();
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -30,28 +32,31 @@ function Scene({ socket }) {
   //   console.log("click");
   // }
 
-  const handleCanvasClick = (event) => {
-    //get user mouse location
-    const currentCoord = { x: event.clientX, y: event.clientY };
-    //add newest location to array in state
-    setCoordinates([...coordinates, currentCoord]);
-  }
+  // const handleCanvasClick = (event) => {
+  //   //get user mouse location
+  //   const currentCoord = { x: event.clientX, y: event.clientY };
+  //   //add newest location to array in state
+  //   setCoordinates([...coordinates, currentCoord]);
+  // }
 
 
 
   return (
     <React.Fragment>
       <div style={{ width: "95vw", height: "95vh" }}>
-      <canvas
+      {/* <canvas
         ref={canvasRef}
         width={canvasWidth}
         height={canvasHeight}
         onClick={handleCanvasClick}
-      />
-      {/* <Canvas>
-        <Tree />
-        <Leaf />
-      </Canvas> */}
+      /> */}
+      {/* Canvas object is portal into Threejs, renders Threejs elements, not DOM elements */}
+      <Canvas>
+        {/* <Tree />
+        <Leaf /> */}
+        <OrbitControls />
+        <Svg />
+      </Canvas>
       
       <div className="usernames" >
         {users.map((user) => (
