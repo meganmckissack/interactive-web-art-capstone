@@ -3,6 +3,7 @@
 // import PropTypes from 'prop-types';
 // import flatten from 'lodash-es/flatten';
 // import { SVGLoader as loader } from 'three/examples/jsm/loaders/SVGLoader';
+import React, { useRef, useState } from 'react';
 import LeafSvg from '../assets/leaf.svg';
 import Logo from '../logo.svg';
 
@@ -179,13 +180,22 @@ import Logo from '../logo.svg';
 
 // export default Svg;
 
-import { useLoader } from '@react-three/fiber'
+import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import { SVGLoader } from 'three-stdlib'
 
 
-function SVG() {
+function SVG(props) {
   const svg = useLoader(SVGLoader, LeafSvg)
   const shapes = SVGLoader.createShapes(svg.paths[0])
+
+  const [active, setActive] = useState(false);
+  const meshRef = useRef();
+  // useFrame(({ mouse }) => {
+  //   const x = (mouse.x * viewport.width) / 2;
+  //   const y = (mouse.y * viewport.height) / 2;
+  //   meshRef.current.position.set(x, y, 0);
+  //   meshRef.current.position.set(-y, x, 0);
+  // })
 
   const extrudeSettings = {
     curveSegments: 12,
@@ -197,7 +207,7 @@ function SVG() {
   }
 
   return (
-    <mesh scale={0.1} rotation-x={-Math.PI / 2} position={[-1.5, 0, 1.5]}>
+    <mesh {...props} ref={meshRef} scale={0.1} rotation-x={Math.PI} onClick={(e) => setActive(!active)}>
       <extrudeGeometry args={[shapes, extrudeSettings]} />
       <meshNormalMaterial />
     </mesh>
