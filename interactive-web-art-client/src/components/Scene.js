@@ -48,9 +48,14 @@ function Scene({ socket }) {
   // }
   
 
-  // const eventHandler = () => {
-  //   console.log("click");
-  // }
+  const eventHandler = (event) => {
+    console.log(event);
+    const currentCoord = { x: event.clientX, y: event.clientY };
+    // const currentCoord = event.point;
+    setCoordinates([...coordinates, currentCoord]);
+    generateNewLeaf();
+  }
+
 
   // const handleCanvasClick = (event) => {
   //   //get user mouse location
@@ -72,15 +77,17 @@ function Scene({ socket }) {
       /> */}
       {/* Canvas object is portal into Threejs, renders Threejs elements, not DOM elements */}
       <Canvas
-      onClick={() => generateNewLeaf()}
+      onPointerDown={ eventHandler }
+      // onClick={() => generateNewLeaf()}
       camera={{ position: [0, 7, 7]}}
       onCreated={({ gl }) => gl.setClearColor('white')}>
       <ambientLight intensity={0.5} />
       <pointLight position={[150, 150, 150]} intensity={0.55} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-      {leaves.map((props) => (
-        <Svg {...props} />
+      {leaves.map((props, i) => (
+        <Svg key={i} {...props} />
       ))}
+      
         {/* <Tree />
         <Leaf /> */}
         <OrbitControls />

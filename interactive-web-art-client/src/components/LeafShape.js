@@ -185,6 +185,7 @@ import { SVGLoader } from 'three-stdlib'
 
 
 function SVG(props) {
+  const { viewport } = useThree;
   const svg = useLoader(SVGLoader, LeafSvg)
   const shapes = SVGLoader.createShapes(svg.paths[0])
 
@@ -197,6 +198,12 @@ function SVG(props) {
   //   meshRef.current.position.set(-y, x, 0);
   // })
 
+  const eventHandler = (event) => {
+    console.log('point', event.point);
+    // meshRef.current.position.set(event);
+  }
+
+
   const extrudeSettings = {
     curveSegments: 12,
     steps: 1,
@@ -207,7 +214,7 @@ function SVG(props) {
   }
 
   return (
-    <mesh {...props} ref={meshRef} scale={0.1} rotation-x={Math.PI} onClick={(e) => setActive(!active)}>
+    <mesh {...props} ref={meshRef} scale={0.1} rotation-x={Math.PI} onClick={ eventHandler }>
       <extrudeGeometry args={[shapes, extrudeSettings]} />
       <meshNormalMaterial />
     </mesh>
