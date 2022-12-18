@@ -1,11 +1,61 @@
+import { useLoader } from '@react-three/fiber'
+import { SVGLoader } from 'three-stdlib'
+import React, { useRef } from 'react';
+import LeafSvg from '../assets/leaf.svg';
+
+
+function SVG(props) {
+  // const { viewport } = useThree;
+  const svg = useLoader(SVGLoader, LeafSvg)
+  const shapes = SVGLoader.createShapes(svg.paths[0])
+
+  // const [active, setActive] = useState(false);
+
+  const meshRef = useRef();
+
+  //trying to emulate mouse coordinates as the position coordinates of the leaf mesh
+  // useFrame(({ mouse }) => {
+  //   const x = (mouse.x * viewport.width) / 2;
+  //   const y = (mouse.y * viewport.height) / 2;
+  //   meshRef.current.position.set(x, y, 0);
+  //   meshRef.current.position.set(-y, x, 0);
+  // })
+
+  // is currently logging the Vector 3 coordinates when clicking on a mesh
+  const eventHandler = (event) => {
+    console.log('point', event.point);
+    // meshRef.current.position.set(event);
+  }
+
+
+  const extrudeSettings = {
+    curveSegments: 12,
+    steps: 1,
+    depth: 2,
+    bevelThickness: 0.5,
+    bevelSize: 1,
+    bevelSegments: 3
+  }
+
+  return (
+    <mesh {...props} ref={meshRef} scale={0.01} rotation-x={Math.PI} onClick={ eventHandler }>
+      <extrudeGeometry args={[shapes, extrudeSettings]} />
+      <meshNormalMaterial />
+    </mesh>
+  )
+}
+
+export default SVG;
+
+
+// -- Code Graveyard -- enter at your own risk
+
 // import * as THREE from 'three';
 // import React, { useState, useEffect, useRef } from 'react';
 // import PropTypes from 'prop-types';
 // import flatten from 'lodash-es/flatten';
 // import { SVGLoader as loader } from 'three/examples/jsm/loaders/SVGLoader';
-import React, { useRef, useState } from 'react';
-import LeafSvg from '../assets/leaf.svg';
-import Logo from '../logo.svg';
+// import Logo from '../logo.svg';
 
 // // Promise of an SVG parsed into paths 
 // // with which the threejs engine will make shapes
@@ -179,46 +229,3 @@ import Logo from '../logo.svg';
 // }
 
 // export default Svg;
-
-import { useFrame, useLoader, useThree } from '@react-three/fiber'
-import { SVGLoader } from 'three-stdlib'
-
-
-function SVG(props) {
-  const { viewport } = useThree;
-  const svg = useLoader(SVGLoader, LeafSvg)
-  const shapes = SVGLoader.createShapes(svg.paths[0])
-
-  const [active, setActive] = useState(false);
-  const meshRef = useRef();
-  // useFrame(({ mouse }) => {
-  //   const x = (mouse.x * viewport.width) / 2;
-  //   const y = (mouse.y * viewport.height) / 2;
-  //   meshRef.current.position.set(x, y, 0);
-  //   meshRef.current.position.set(-y, x, 0);
-  // })
-
-  const eventHandler = (event) => {
-    console.log('point', event.point);
-    // meshRef.current.position.set(event);
-  }
-
-
-  const extrudeSettings = {
-    curveSegments: 12,
-    steps: 1,
-    depth: 2,
-    bevelThickness: 0.5,
-    bevelSize: 1,
-    bevelSegments: 3
-  }
-
-  return (
-    <mesh {...props} ref={meshRef} scale={0.01} rotation-x={Math.PI} onClick={ eventHandler }>
-      <extrudeGeometry args={[shapes, extrudeSettings]} />
-      <meshNormalMaterial />
-    </mesh>
-  )
-}
-
-export default SVG;

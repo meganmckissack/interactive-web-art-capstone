@@ -1,3 +1,6 @@
+// tried to refactor a procedural leaf generator that https://davideprati.com/ made to fit react-three-fiber 
+// but the face3 element is deprecated in @react-three-fiber and now calls for vertices coordinates that I don't know enough vector math to figure out yet
+
 import {Vector3, Vector2, Face3, Geometry} from 'three';
 
 export default function Leaf() {
