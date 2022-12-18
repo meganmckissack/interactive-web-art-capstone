@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import * as dat from 'lil-gui';
 // import { useCanvas } from '../hooks/useCanvas.js';
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { OrbitControls } from '@react-three/drei'
-// import Tree from "./Tree.js";
+import Tree from "./Tree.js";
 // import Leaf from "./Leaf.js";
 import Svg from "./LeafShape";
 import { ReverseSubtractEquation } from "three";
@@ -47,15 +47,24 @@ function Scene({ socket }) {
   //   )
   // }
   
+  
 
-  const eventHandler = (event) => {
-    console.log(event);
-    const currentCoord = { x: event.clientX, y: event.clientY };
-    // const currentCoord = event.point;
-    setCoordinates([...coordinates, currentCoord]);
-    generateNewLeaf();
-  }
+  // const eventHandler = (event) => {
+  //   console.log(event);
+  //   const currentCoord = { x: event.clientX, y: event.clientY };
+  //   // // const currentCoord = event.point;
+  //   setCoordinates([...coordinates, currentCoord]);
+  //   // generateNewLeaf();
+  // }
 
+  // const treeRef = useRef();
+  // useFrame(({ mouse, event }) => {
+  //   const x = (mouse.x * event.clientX) / 2;
+  //   const y = (mouse.y * viewport.height) / 2;
+  //   meshRef.current.position.set(x, y, 0);
+  //   meshRef.current.position.set(-y, x, 0);
+  // })
+  
 
   // const handleCanvasClick = (event) => {
   //   //get user mouse location
@@ -77,19 +86,20 @@ function Scene({ socket }) {
       /> */}
       {/* Canvas object is portal into Threejs, renders Threejs elements, not DOM elements */}
       <Canvas
-      onPointerDown={ eventHandler }
-      // onClick={() => generateNewLeaf()}
-      camera={{ position: [0, 7, 7]}}
-      onCreated={({ gl }) => gl.setClearColor('white')}>
+      // onPointerDown={ eventHandler }
+      onClick={() => generateNewLeaf()}
+      camera={{ position: [0, 0, 3]}}
+      onCreated={({ gl }) => gl.setClearColor('#e7f0e4')}>
       <ambientLight intensity={0.5} />
-      <pointLight position={[150, 150, 150]} intensity={0.55} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+      {/* <pointLight position={[10, 10, 10]} intensity={0.05} /> */}
+      {/* <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} /> */}
+      <Tree />
       {leaves.map((props, i) => (
         <Svg key={i} {...props} />
       ))}
       
-        {/* <Tree />
-        <Leaf /> */}
+        
+        {/* <Leaf />  */}
         <OrbitControls />
         {/* {[...svg]} */}
         {/* <Svg 
@@ -116,7 +126,7 @@ function Scene({ socket }) {
   function generateNewLeaf() {
     const total = leaves.length;
     let newLeaves = leaves.map((props) => ({...props}))
-    newLeaves.push({ position: [getRandomInt(3), total * 0.5 - 3, 0]})
+    newLeaves.push({ position: [coordinates, total *  1 - 1, 3]})
     setLeaves([...newLeaves])
   }
 
