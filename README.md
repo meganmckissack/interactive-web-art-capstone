@@ -14,8 +14,10 @@ An interactive web app to give users a fun experience and a connection to others
 - _express.js_
 - _cors_
 - _nodemon_
-- _three.js_
+- _react-three-fiber_
 - _webgl_
+- _photogrammetry_
+- 
 
 ## Setup/Installation Requirements
 - using your terminal, clone or download this repository to your computer
@@ -24,7 +26,7 @@ An interactive web app to give users a fun experience and a connection to others
 
 ## Known Bugs
 
-_none yet_
+_can't get pointer event coordinates to pass to leaf generator position_
 
 ## License
 
