@@ -1,21 +1,17 @@
+// use Canvas Hook to let users draw leaves at mouse coordinates
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Canvas } from "@react-three/fiber";
-import { Sky, OrbitControls } from '@react-three/drei'
-import Tree from "./Tree.js";
-import Svg from "./LeafShape";
-
+import { useCanvas } from '../hooks/useCanvas.js';
 
 function Scene({ socket }) {
   const [users, setUsers] = useState([]);
-  // const [coordinates, setCoordinates] = useState([]);
+  const [ coordinates, setCoordinates, canvasRef, canvasWidth, canvasHeight ] = useCanvas();
   const navigate = useNavigate();
-  const [leaves, setLeaves] = useState([]);
-  
+
   useEffect(() => {
     socket.on('newUserResponse', (data) => setUsers(data));
   }, [socket, users]);
-
   //sends user back to splash page, removes usename from local storage and refreshes the browser window
   const handleLeaveScene = () => {
     localStorage.removeItem('userName');
@@ -23,46 +19,105 @@ function Scene({ socket }) {
     window.location.reload();
   }
 
+  const handleCanvasClick = (event) => {
+    //get user mouse location
+    const currentCoord = { x: event.clientX, y: event.clientY };
+    //add newest location to array in state
+    setCoordinates([...coordinates, currentCoord]);
+  }
+
   return (
     <React.Fragment>
-      <div style={{ width: "100vw", height: "90vh" }}>
-      <Canvas
-        // onPointerDown={ eventHandler }
-        onClick={() => generateNewLeaf()}
-        camera={{ position: [0, 0, 3]}}
-        onCreated={({ gl }) => gl.setClearColor('#e7f0e4')}>
-      <OrbitControls />
-      <Sky azimuth={5} inclination={0.6} distance={1000} />
-      <ambientLight intensity={0.5} />
-      <Tree />
-      {leaves.map((props, i) => (
-        <Svg key={i} {...props} />
-      ))}
-      </Canvas>
-      
+      <div style={{ width: "95vw", height: "95vh" }}>
+      <canvas
+        ref={canvasRef}
+        width={canvasWidth}
+        height={canvasHeight}
+        onClick={handleCanvasClick}
+      /> 
+
       <div className="usernames" >
         {users.map((user) => (
           <p key={user.socketID}>{user.userName}</p>
         ))}
+      </div>
+      <div className="goBack-button">
         <button onClick={handleLeaveScene}>Leave Experience</button>
       </div>
       </div>
     </React.Fragment>
   );
-
-  function generateNewLeaf() {
-    const total = leaves.length;
-    let newLeaves = leaves.map((props) => ({...props}))
-    newLeaves.push({ position: [getRandomInt(3), total *  1 - 1, 1]})
-    setLeaves([...newLeaves])
-  }
-
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max))
-  }
 }
 
 export default Scene;
+
+//Tree loader and leaf generator
+
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { Canvas } from "@react-three/fiber";
+// import { Sky, OrbitControls } from '@react-three/drei'
+// import Tree from "./Tree.js";
+// import Svg from "./LeafShape";
+
+
+// function Scene({ socket }) {
+//   const [users, setUsers] = useState([]);
+//   // const [coordinates, setCoordinates] = useState([]);
+//   const navigate = useNavigate();
+//   const [leaves, setLeaves] = useState([]);
+  
+//   useEffect(() => {
+//     socket.on('newUserResponse', (data) => setUsers(data));
+//   }, [socket, users]);
+
+//   //sends user back to splash page, removes usename from local storage and refreshes the browser window
+//   const handleLeaveScene = () => {
+//     localStorage.removeItem('userName');
+//     navigate('/');  
+//     window.location.reload();
+//   }
+
+//   return (
+//     <React.Fragment>
+//       <div style={{ width: "100vw", height: "90vh" }}>
+//       <Canvas
+//         // onPointerDown={ eventHandler }
+//         onClick={() => generateNewLeaf()}
+//         camera={{ position: [0, 0, 3]}}
+//         onCreated={({ gl }) => gl.setClearColor('#e7f0e4')}>
+//       <OrbitControls />
+//       <Sky azimuth={5} inclination={0.6} distance={1000} />
+//       <ambientLight intensity={0.5} />
+//       <Tree />
+//       {leaves.map((props, i) => (
+//         <Svg key={i} {...props} />
+//       ))}
+//       </Canvas>
+      
+//       <div className="usernames" >
+//         {users.map((user) => (
+//           <p key={user.socketID}>{user.userName}</p>
+//         ))}
+//         <button onClick={handleLeaveScene}>Leave Experience</button>
+//       </div>
+//       </div>
+//     </React.Fragment>
+//   );
+
+//   function generateNewLeaf() {
+//     const total = leaves.length;
+//     let newLeaves = leaves.map((props) => ({...props}))
+//     newLeaves.push({ position: [getRandomInt(3), total *  1 - 1, 1]})
+//     setLeaves([...newLeaves])
+//   }
+
+//   function getRandomInt(max) {
+//     return Math.floor(Math.random() * Math.floor(max))
+//   }
+// }
+
+// export default Scene;
 
 
 
