@@ -214,7 +214,7 @@ function SVG(props) {
   }
 
   return (
-    <mesh {...props} ref={meshRef} scale={0.1} rotation-x={Math.PI} onClick={ eventHandler }>
+    <mesh {...props} ref={meshRef} scale={0.01} rotation-x={Math.PI} onClick={ eventHandler }>
       <extrudeGeometry args={[shapes, extrudeSettings]} />
       <meshNormalMaterial />
     </mesh>

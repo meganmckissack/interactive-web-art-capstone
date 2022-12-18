@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 // import { useCanvas } from '../hooks/useCanvas.js';
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { OrbitControls } from '@react-three/drei'
+import { Sky, OrbitControls } from '@react-three/drei'
 import Tree from "./Tree.js";
 // import Leaf from "./Leaf.js";
 import Svg from "./LeafShape";
@@ -90,7 +90,9 @@ function Scene({ socket }) {
       onClick={() => generateNewLeaf()}
       camera={{ position: [0, 0, 3]}}
       onCreated={({ gl }) => gl.setClearColor('#e7f0e4')}>
+      <Sky azimuth={5} inclination={0.6} distance={1000} />
       <ambientLight intensity={0.5} />
+      
       {/* <pointLight position={[10, 10, 10]} intensity={0.05} /> */}
       {/* <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} /> */}
       <Tree />
@@ -126,7 +128,7 @@ function Scene({ socket }) {
   function generateNewLeaf() {
     const total = leaves.length;
     let newLeaves = leaves.map((props) => ({...props}))
-    newLeaves.push({ position: [coordinates, total *  1 - 1, 3]})
+    newLeaves.push({ position: [coordinates, total *  1 - 1, 1]})
     setLeaves([...newLeaves])
   }
 
