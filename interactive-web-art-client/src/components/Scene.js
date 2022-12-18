@@ -44,8 +44,6 @@ function Scene({ socket }) {
         {users.map((user) => (
           <p key={user.socketID}>{user.userName}</p>
         ))}
-      </div>
-      <div className="goBack-button">
         <button onClick={handleLeaveScene}>Leave Experience</button>
       </div>
       </div>

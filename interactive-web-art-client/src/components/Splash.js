@@ -14,17 +14,17 @@ function Splash({ socket }) {
 
   return (
     <React.Fragment>
+      <h2>Add your name and join</h2>
       <form onSubmit={handleSubmit}>
-        <h2>Sign in to play</h2>
-        <label htmlFor='username'>Username</label>
+        <label htmlFor='username'></label>
         <input 
           type='text'
           name='username'
           id='username'
-          value={userName}
+          placeholder='username'
           onChange={(event) => setUserName(event.target.value)}
         />
-      <button>Sign In</button>
+      <button>Join In</button>
       </form>
     </React.Fragment>
   );

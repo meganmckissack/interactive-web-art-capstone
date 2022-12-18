@@ -37,4 +37,21 @@
   }
 } */
 
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: blue;
+  background-image:
+    radial-gradient(
+      #fc5c7d,
+      #6a82fb
+      );
+}
 
+h2 {
+  color: white;
+}
