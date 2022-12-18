@@ -29,3 +29,11 @@
       https://github.com/meganmckissack/r3f-practice
 
 
+
+### Deployed Practice projects
+
+[react-three-fiber objects and animation](https://r3f-interaction-practice.vercel.app/)
+
+[three-js 3D text](https://3d-text-six-ivory.vercel.app/)
+
+[vertex and fragment shaders](https://shaders-kappa.vercel.app/)
